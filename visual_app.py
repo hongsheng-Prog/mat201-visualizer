@@ -59,10 +59,7 @@ if mode == "Function of Two Variables (2D Domain)":
         formula = r"$\large z = x^{2} - y^{2}$"
         st.latex(formula)  # 在分支内显示
 
-    # --- 注意：这里不能再有 st.latex(formula)，因为 formula 的作用域只在上面各个分支内 ---
-    # --- VISUALIZATION ---
-    col1, col2 = st.columns(2)
-    ... # 其余绘图代码保持不变
+   
     # --- VISUALIZATION ---
     col1, col2 = st.columns(2)
 
