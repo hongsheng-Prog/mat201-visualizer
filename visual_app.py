@@ -40,23 +40,23 @@ if mode == "Function of Two Variables (2D Domain)":
     resolution = st.sidebar.slider("Grid Resolution", 20, 100, 50)
     range_val = st.sidebar.slider("Axis Range", 1, 10, 5)
 
-       # --- DATA GENERATION ---
-x = np.linspace(-range_val, range_val, resolution)
-y = np.linspace(-range_val, range_val, resolution)
-X, Y = np.meshgrid(x, y)
+    # --- DATA GENERATION ---
+    x = np.linspace(-range_val, range_val, resolution)
+    y = np.linspace(-range_val, range_val, resolution)
+    X, Y = np.meshgrid(x, y)
 
-# 精确匹配选项，避免歧义
-if function_choice == "Simple: Paraboloid (x^2 + y^2)":
-    Z = X ** 2 + Y ** 2
-    formula = r"$z(x, y) = x^{2} + y^{2}$"
-elif function_choice == "Complex: Ripple (sin(sqrt(x^2 + y^2)))":
-    Z = np.sin(np.sqrt(X ** 2 + Y ** 2))
-    formula = r"$z(x, y) = \sin\left(\sqrt{x^{2} + y^{2}}\right)$"
-else:  # 对应 "Saddle: Hyperbolic Paraboloid (x^2 - y^2)"
-    Z = X ** 2 - Y ** 2
-    formula = r"$z(x, y) = x^{2} - y^{2}$"
+    # 精确匹配选项，避免歧义
+    if function_choice == "Simple: Paraboloid (x^2 + y^2)":
+        Z = X ** 2 + Y ** 2
+        formula = r"$z(x, y) = x^{2} + y^{2}$"
+    elif function_choice == "Complex: Ripple (sin(sqrt(x^2 + y^2)))":
+        Z = np.sin(np.sqrt(X ** 2 + Y ** 2))
+        formula = r"$z(x, y) = \sin\left(\sqrt{x^{2} + y^{2}}\right)$"
+    else:  # 对应 "Saddle: Hyperbolic Paraboloid (x^2 - y^2)"
+        Z = X ** 2 - Y ** 2
+        formula = r"$z(x, y) = x^{2} - y^{2}$"
 
-st.latex(formula)
+    st.latex(formula)
 
     # --- VISUALIZATION ---
     col1, col2 = st.columns(2)
@@ -64,24 +64,22 @@ st.latex(formula)
     with col1:
         st.subheader("3D Surface Plot")
         fig_3d = go.Figure(data=[go.Surface(z=Z, x=X, y=Y, colorscale='Viridis')])
-        # 移除了 width 和 height，让Streamlit自动调整，并设置更适合3D的纵横比
         fig_3d.update_layout(title='Surface Representation', autosize=True, scene_aspectmode='cube')
-        st.plotly_chart(fig_3d, use_container_width=True)  # 关键参数：使用容器宽度
+        st.plotly_chart(fig_3d, use_container_width=True)
 
     with col2:
-            st.subheader("Contour Plot (Level Curves)")
-            # 使用 Matplotlib 创建等高线图
-            import matplotlib.pyplot as plt
-
-            fig, ax = plt.subplots(figsize=(5, 4))  # 创建一个图形和坐标轴
-            contour = ax.contourf(X, Y, Z, levels=20, cmap='viridis')  # 绘制填充等高线
-            ax.contour(X, Y, Z, levels=20, colors='black', linewidths=0.5)  # 叠加轮廓线
-            ax.set_title('Domain Map (Top-Down View)')
-            ax.set_xlabel('X')
-            ax.set_ylabel('Y')
-            plt.colorbar(contour, ax=ax, label='z value')  # 添加颜色条
-            st.pyplot(fig)  # 在Streamlit中显示
-            plt.close(fig)  # 关闭图形，释放内存
+        st.subheader("Contour Plot (Level Curves)")
+        # 使用 Matplotlib 创建等高线图
+        import matplotlib.pyplot as plt
+        fig, ax = plt.subplots(figsize=(5, 4))
+        contour = ax.contourf(X, Y, Z, levels=20, cmap='viridis')
+        ax.contour(X, Y, Z, levels=20, colors='black', linewidths=0.5)
+        ax.set_title('Domain Map (Top-Down View)')
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        plt.colorbar(contour, ax=ax, label='z value')
+        st.pyplot(fig)
+        plt.close(fig)
 
 # ==========================================
 # TOPIC 1.2: FUNCTIONS OF THREE VARIABLES
