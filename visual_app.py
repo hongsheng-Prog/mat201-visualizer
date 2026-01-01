@@ -48,13 +48,13 @@ if mode == "Function of Two Variables (2D Domain)":
     # 精确匹配选项，避免歧义
     if function_choice == "Simple: Paraboloid (x^2 + y^2)":
         Z = X ** 2 + Y ** 2
-        formula = r\large" $z = x^2 + y^2$"
+        formula = rf"\large $z = x^2 + y^2$"
     elif function_choice == "Complex: Ripple (sin(sqrt(x^2 + y^2)))":
         Z = np.sin(np.sqrt(X ** 2 + Y ** 2))
-        formula = r\large" $z = \sin ( \sqrt{x^2 + y^2} )$"
+        formula = rf"\large $z = \sin ( \sqrt{x^2 + y^2} )$"
     else:  # 对应 "Saddle: Hyperbolic Paraboloid (x^2 - y^2)"
         Z = X ** 2 - Y ** 2
-        formula = r\large" $z = x^2 - y^2$"
+        formula = rf"\large $z = x^2 - y^2$"
 
     st.latex(formula)
 
