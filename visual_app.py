@@ -56,7 +56,7 @@ if mode == "Function of Two Variables (2D Domain)":
         Z = X ** 2 - Y ** 2
         formula = r"\large $z = x^2 - y^2$"
 
-   st.latex(formula)
+    st.latex(formula)
 
     # --- VISUALIZATION ---
     col1, col2 = st.columns(2)
