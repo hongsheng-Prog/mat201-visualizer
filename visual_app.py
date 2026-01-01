@@ -40,22 +40,23 @@ if mode == "Function of Two Variables (2D Domain)":
     resolution = st.sidebar.slider("Grid Resolution", 20, 100, 50)
     range_val = st.sidebar.slider("Axis Range", 1, 10, 5)
 
-    # --- DATA GENERATION ---
-    x = np.linspace(-range_val, range_val, resolution)
-    y = np.linspace(-range_val, range_val, resolution)
-    X, Y = np.meshgrid(x, y)
+       # --- DATA GENERATION ---
+x = np.linspace(-range_val, range_val, resolution)
+y = np.linspace(-range_val, range_val, resolution)
+X, Y = np.meshgrid(x, y)
 
-    if "Paraboloid" in function_choice:
-        Z = X ** 2 + Y ** 2
-        formula = "$z = x^2 + y^2$"
-    elif "Ripple" in function_choice:
-        Z = np.sin(np.sqrt(X ** 2 + Y ** 2))
-        formula = "$z = \sin(\sqrt{x^2 + y^2})$"
-    else:
-        Z = X ** 2 - Y ** 2
-        formula = "$z = x^2 - y^2$"
+# 精确匹配选项，避免歧义
+if function_choice == "Simple: Paraboloid (x^2 + y^2)":
+    Z = X ** 2 + Y ** 2
+    formula = r"$z(x, y) = x^{2} + y^{2}$"
+elif function_choice == "Complex: Ripple (sin(sqrt(x^2 + y^2)))":
+    Z = np.sin(np.sqrt(X ** 2 + Y ** 2))
+    formula = r"$z(x, y) = \sin\left(\sqrt{x^{2} + y^{2}}\right)$"
+else:  # 对应 "Saddle: Hyperbolic Paraboloid (x^2 - y^2)"
+    Z = X ** 2 - Y ** 2
+    formula = r"$z(x, y) = x^{2} - y^{2}$"
 
-    st.latex(formula)
+st.latex(formula)
 
     # --- VISUALIZATION ---
     col1, col2 = st.columns(2)
@@ -90,15 +91,15 @@ elif mode == "Function of Three Variables (3D Domain)":
     st.markdown("""
     **Concept:** A function of three variables assigns a number $w$ to a triplet $(x, y, z)$.
     * **Visualization:** We cannot graph this in 4D. Instead, we use **Level Surfaces**.
-    * **Level Surface:** The set of all points $(x,y,z)$ where the function equals a constant constant $k$ (i.e., $f(x,y,z) = k$).
+    * **Level Surface:** The set of all points $(x,y,z)$ where the function equals a constant $k$ (i.e., $f(x,y,z) = k$).
     """)
 
     # --- INPUTS ---
     st.sidebar.subheader("Level Surface Settings")
     iso_val = st.sidebar.slider("Level Value (k)", 1, 20, 9)
 
-    st.latex(f"x^2 + y^2 + z^2 = {iso_val}")
-    st.caption(f"Visualizing the sphere where $w = {iso_val}$")
+    st.latex(rf"\large w(x,y,z) = x^{{2}} + y^{{2}} + z^{{2}} = {iso_val}")
+    st.caption(rf"Visualizing the **level surface** where the function value $w$ is constant: $w = {iso_val}$.")
 
     # --- DATA GENERATION (Sphere) ---
     # We generate a point cloud to represent the surface for simplicity in this demo
