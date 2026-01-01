@@ -46,16 +46,21 @@ if mode == "Function of Two Variables (2D Domain)":
     X, Y = np.meshgrid(x, y)
 
     # 精确匹配选项，避免歧义
-    if function_choice == “Simple: Paraboloid (x^2 + y^2)”:
+    # --- DATA GENERATION ---
+    x = np.linspace(-range_val, range_val, resolution)
+    y = np.linspace(-range_val, range_val, resolution)
+    X, Y = np.meshgrid(x, y)
+
+    # 精确匹配选项，避免歧义
+    if function_choice == "Simple: Paraboloid (x^2 + y^2)":
         Z = X ** 2 + Y ** 2
-        st.latex(r“$\large z = x^{2} + y^{2}$”)
-    elif function_choice == “Complex: Ripple (sin(sqrt(x^2 + y^2)))”:
+        st.latex(r"$\large z = x^{2} + y^{2}$")
+    elif function_choice == "Complex: Ripple (sin(sqrt(x^2 + y^2)))":
         Z = np.sin(np.sqrt(X ** 2 + Y ** 2))
-        # 这是核心修正行：确保LaTeX语法完全正确
-        st.latex(r“$\large z = \sin\left( \sqrt{x^{2} + y^{2}} \right)$”)
-    else:  # 对应 “Saddle: Hyperbolic Paraboloid (x^2 - y^2)”
+        st.latex(r"$\large z = \sin\left( \sqrt{x^{2} + y^{2}} \right)$")
+    else:  # 对应 "Saddle: Hyperbolic Paraboloid (x^2 - y^2)"
         Z = X ** 2 - Y ** 2
-        st.latex(r“$\large z = x^{2} - y^{2}$”)
+        st.latex(r"$\large z = x^{2} - y^{2}$")
 
     st.latex(formula)
 
