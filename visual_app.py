@@ -48,13 +48,13 @@ if mode == "Function of Two Variables (2D Domain)":
     # 精确匹配选项，避免歧义
     if function_choice == "Simple: Paraboloid (x^2 + y^2)":
         Z = X ** 2 + Y ** 2
-        formula = r"$z(x, y) = x^{2} + y^{2}$"
+        formula = r"$z = x^2 + y^2$"
     elif function_choice == "Complex: Ripple (sin(sqrt(x^2 + y^2)))":
         Z = np.sin(np.sqrt(X ** 2 + Y ** 2))
-        formula = r"$z(x, y) = \sin\left(\sqrt{x^{2} + y^{2}}\right)$"
+        formula = r"$z = \sin ( \sqrt{x^2 + y^2} )$"
     else:  # 对应 "Saddle: Hyperbolic Paraboloid (x^2 - y^2)"
         Z = X ** 2 - Y ** 2
-        formula = r"$z(x, y) = x^{2} - y^{2}$"
+        formula = r"$z = x^2 - y^2$"
 
     st.latex(formula)
 
@@ -96,7 +96,7 @@ elif mode == "Function of Three Variables (3D Domain)":
     st.sidebar.subheader("Level Surface Settings")
     iso_val = st.sidebar.slider("Level Value (k)", 1, 20, 9)
 
-    st.latex(rf"\large w(x,y,z) = x^{{2}} + y^{{2}} + z^{{2}} = {iso_val}")
+    st.latex(rf"\large w = x^2 + y^2 + z^2 = {iso_val}")
     st.caption(rf"Visualizing the **level surface** where the function value $w$ is constant: $w = {iso_val}$.")
 
     # --- DATA GENERATION (Sphere) ---
