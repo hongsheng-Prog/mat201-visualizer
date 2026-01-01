@@ -47,13 +47,13 @@ if mode == "Function of Two Variables (2D Domain)":
 
     if "Paraboloid" in function_choice:
         Z = X ** 2 + Y ** 2
-        formula = "$z = x^2 + y^2$"
+        formula = "z = x^2 + y^2"
     elif "Ripple" in function_choice:
         Z = np.sin(np.sqrt(X ** 2 + Y ** 2))
-        formula = "$z = \sin(\sqrt{x^2 + y^2})$"
+        formula = "z = \sin(\sqrt{x^2 + y^2})"
     else:
         Z = X ** 2 - Y ** 2
-        formula = "$z = x^2 - y^2$"
+        formula = "z = x^2 - y^2"
 
     st.latex(formula)
 
