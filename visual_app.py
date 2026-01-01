@@ -51,7 +51,7 @@ if mode == "Function of Two Variables (2D Domain)":
         formula = r"z=x^2+y^2"
     elif function_choice == "Complex: Ripple (sin(sqrt(x^2 + y^2)))":
         Z = np.sin(np.sqrt(X ** 2 + Y ** 2))
-        formula = r"z=\sin (sqrt{x^2 + y^2})"
+        formula = r"z=\sin (sqrt(x^2 + y^2))"
     else:  # 对应 "Saddle: Hyperbolic Paraboloid (x^2 - y^2)"
         Z = X ** 2 - Y ** 2
         formula = r"z = x^2 - y^2"
